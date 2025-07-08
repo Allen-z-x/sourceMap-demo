@@ -33,7 +33,7 @@ const preLine = () => {
     </div>
   </div>
 </template>
-<style lang="less" scoped>
+<style scoped>
 .pre-code {
   .error-detail {
     .error-code {
