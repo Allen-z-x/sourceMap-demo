@@ -64,6 +64,7 @@ const sourceMapUpload = async (file: any) => {
     js_error.value.stack_frames[stackFrameObj.index].origin = source
     dialogVisible.value = false
   }
+  return false
 }
 </script>
 
