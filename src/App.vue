@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 // onMounted(() => {
 //   const testNum = null
@@ -16,6 +15,8 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
         <RouterLink to="/trigger">触发js异常</RouterLink>
+        <RouterLink to="/record">录制</RouterLink>
+        <RouterLink to="/play">回放</RouterLink>
       </nav>
     </div>
   </header>
