@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import rrwebPlayer from 'rrweb-player'
-import 'rrweb-player/dist/style.css'
 import { useEventStore } from '@/stores/eventStore'
 const eventStore = useEventStore()
 const events = eventStore.eventList
