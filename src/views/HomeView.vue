@@ -52,8 +52,8 @@ const getSource = async (sourcemap: any, line: number, column: number) => {
   }
 }
 
-const sourceMapUpload = (file: any) => {
-  if (!file.name.endWith('.map')) {
+const sourceMapUpload = async (file: any) => {
+  if (file.name.substring(file.name.lastIndexOf('.') + 1) !== 'map') {
     ElMessage.error('请上传正确的sourceMap文件')
     return
   }
@@ -62,8 +62,8 @@ const sourceMapUpload = (file: any) => {
   reader.onload = async function (evt) {
     const source = await getSource(evt.target?.result, stackFrameObj.line, stackFrameObj.column)
     js_error.value.stack_frames[stackFrameObj.index].origin = source
+    dialogVisible.value = false
   }
-  dialogVisible.value = false
 }
 </script>
 
