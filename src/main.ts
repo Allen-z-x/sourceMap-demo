@@ -9,7 +9,6 @@ import 'rrweb-player/dist/style.css'
 import ElementPlus from 'element-plus'
 import App from './App.vue'
 import router from './router'
-import { findCodeBySourceMap } from './utils'
 
 interface MessageInstance {
   $message?: {
@@ -30,8 +29,6 @@ app.config.errorHandler = (err: unknown, vm: ComponentPublicInstance | null) => 
     error = new Error(String(err))
   }
   const errorStack: StackFrame[] = ErrorStackParser.parse(error)
-  //   console.error('errorStack', errorStack)
-  //   findCodeBySourceMap(errorStack[0])
   const jsError = {
     stack_frames: errorStack,
     message: error.message,
