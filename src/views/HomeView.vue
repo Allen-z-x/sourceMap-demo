@@ -2,6 +2,7 @@
 import { ElMessage } from 'element-plus'
 import sourceMap from 'source-map-js'
 import { onMounted, ref } from 'vue'
+import PreView from './PreView.vue'
 const js_error = ref<any>({ stack: [], stack_frames: [] })
 const isError = ref(false)
 const dialogVisible = ref(false)
@@ -32,7 +33,6 @@ const openDialog = (item: any, index: number) => {
     index,
   }
 }
-const handleTabClick = (tab, event) => {}
 
 const getSource = async (sourcemap: any, line: number, column: number) => {
   try {
@@ -91,7 +91,7 @@ const sourceMapUpload = async (file: any) => {
         </el-row>
         <el-row :gutter="20">
           <template v-if="item.origin">
-            <el-col>{{ item.origin }}</el-col>
+            <PreView :origin="item.origin"></PreView>
           </template>
           <template v-else>
             <el-col>{{ item.fileName }}</el-col>
@@ -100,7 +100,7 @@ const sourceMapUpload = async (file: any) => {
       </el-collapse-item>
     </el-collapse>
     <el-dialog v-model="dialogVisible" title="sourceMap源码映射" :width="500">
-      <el-tabs v-model="activeTab" className="sourceMap-tabs" @tab-click="handleTabClick">
+      <el-tabs v-model="activeTab" className="sourceMap-tabs">
         <el-tab-pane label="本地上传" name="local">
           <el-upload drag :before-upload="sourceMapUpload">
             <i className="el-icon-upload"></i>
