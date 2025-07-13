@@ -14,6 +14,7 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@rrweb/packer": "2.0.0-alpha.18",
     "@rrweb/types": "2.0.0-alpha.18",
     "axios": "^1.10.0",
     "element-plus": "^2.10.3",

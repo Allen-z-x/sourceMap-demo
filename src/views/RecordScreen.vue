@@ -1,25 +1,5 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
-import * as rrweb from 'rrweb'
-import type { eventWithTime } from '@rrweb/types'
-import { useEventStore } from '@/stores/eventStore'
-const eventStore = useEventStore()
-const events: eventWithTime[] = []
-let stopFn: undefined | (() => void)
-const onStart = () => {
-  stopFn = rrweb.record({
-    emit: (event) => {
-      console.log(JSON.stringify(event))
-      events.push(event)
-    },
-    recordCanvas: true,
-  })
-}
-const onStop = () => {
-  if (!stopFn) return
-  stopFn()
-  eventStore.setEventList(events)
-}
 
 // do not use same name with ref
 const form = reactive({
@@ -36,13 +16,21 @@ const form = reactive({
 const onSubmit = () => {
   console.log('submit!')
 }
+
+const triggerTypeError = () => {
+  if (typeError.length > 0) {
+    console.log('err!')
+  }
+}
+const triggerReferenceError = () => {
+  throw new ReferenceError('Hello')
+}
+const triggerSyntaxError = () => {
+  throw new SyntaxError('Hello')
+}
 </script>
 <template>
   <div id="record">
-    <div class="button-wrap">
-      <el-button type="primary" @click="onStart"> 开始录制 </el-button>
-      <el-button type="primary" @click="onStop"> 结束录制 </el-button>
-    </div>
     <h2>form</h2>
     <el-form :model="form" label-width="auto" style="max-width: 600px">
       <el-form-item label="Activity name">
@@ -97,6 +85,14 @@ const onSubmit = () => {
         <el-button>Cancel</el-button>
       </el-form-item>
     </el-form>
+
+    <div class="error">
+      <el-button @click="triggerTypeError()">触发TypeError</el-button>
+      <el-divider></el-divider>
+      <el-button @click="triggerReferenceError()">触发ReferenceError</el-button>
+      <el-divider></el-divider>
+      <el-button @click="triggerSyntaxError()">触发SyntaxError</el-button>
+    </div>
   </div>
 </template>
 <style scoped></style>

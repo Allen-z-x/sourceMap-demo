@@ -1,4 +1,3 @@
-import './assets/main.css'
 import ErrorStackParser from 'error-stack-parser'
 import type { StackFrame } from 'error-stack-parser'
 import type { ComponentPublicInstance } from 'vue'
@@ -9,6 +8,7 @@ import 'rrweb-player/dist/style.css'
 import ElementPlus from 'element-plus'
 import App from './App.vue'
 import router from './router'
+import { onStopRecording } from './common/record'
 
 interface MessageInstance {
   $message?: {
@@ -22,6 +22,11 @@ app.use(createPinia())
 app.use(router)
 
 app.config.errorHandler = (err: unknown, vm: ComponentPublicInstance | null) => {
+  // 报错后继续录制 3s 后再停止录制
+  setTimeout(() => {
+    onStopRecording()
+  }, 3000)
+
   let error: Error
   if (err instanceof Error) {
     error = err

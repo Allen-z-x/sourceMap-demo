@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@rrweb/packer':
+        specifier: 2.0.0-alpha.18
+        version: 2.0.0-alpha.18
       '@rrweb/types':
         specifier: 2.0.0-alpha.18
         version: 2.0.0-alpha.18
@@ -682,6 +685,9 @@ packages:
     resolution: {integrity: sha512-3+QZROYfJ25PDcxFF66UEk8jGWigHJeecZILvkPkyQN7oc5BvFo4YEXFkOs154j3FTMp9mn9Ky8RCOwastduEA==}
     cpu: [x64]
     os: [win32]
+
+  '@rrweb/packer@2.0.0-alpha.18':
+    resolution: {integrity: sha512-rEXltE/gnflEv/NatVNPIp4/6EtVlPLSwzIbd4WPSMtQGvwZe5OfAAk/Y88HkbAwb1nHfdA3PtFGn2Epik4inQ==}
 
   '@rrweb/types@2.0.0-alpha.18':
     resolution: {integrity: sha512-iMH3amHthJZ9x3gGmBPmdfim7wLGygC2GciIkw2A6SO8giSn8PHYtRT8OKNH4V+k3SZ6RSnYHcTQxBA7pSWZ3Q==}
@@ -2852,6 +2858,11 @@ snapshots:
 
   '@rollup/rollup-win32-x64-msvc@4.44.2':
     optional: true
+
+  '@rrweb/packer@2.0.0-alpha.18':
+    dependencies:
+      '@rrweb/types': 2.0.0-alpha.18
+      fflate: 0.4.8
 
   '@rrweb/types@2.0.0-alpha.18': {}
 

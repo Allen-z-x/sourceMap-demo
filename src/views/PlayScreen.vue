@@ -3,10 +3,18 @@ import rrwebPlayer from 'rrweb-player'
 import { useEventStore } from '@/stores/eventStore'
 const eventStore = useEventStore()
 const events = eventStore.eventList
+let playerInstance: rrwebPlayer | null = null
 
 const onPlay = () => {
   if (events.length == 0) return
-  new rrwebPlayer({
+
+  // 如果播放器实例已存在，直接返回
+  if (playerInstance) {
+    return
+  }
+
+  // 创建新的播放器实例
+  playerInstance = new rrwebPlayer({
     target: document.querySelector('#doPlay')!,
     props: {
       events,
