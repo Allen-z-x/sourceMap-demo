@@ -20,6 +20,7 @@ onMounted(() => {
     if (jsErrorList) {
       isError.value = true
       js_error.value = JSON.parse(jsErrorList)
+      console.log(js_error.value)
     }
   } catch (e) {
     console.log(e)
@@ -66,6 +67,17 @@ const sourceMapUpload = async (file: any) => {
   }
   return false
 }
+
+const getSourceMapFile = () => {
+  fetch(`${js_error.value.stack_frames[0].fileName}.map`)
+    .then((res) => res.text())
+    .then(async (data) => {
+      const source = await getSource(data, stackFrameObj.line, stackFrameObj.column)
+      console.log(source)
+      js_error.value.stack_frames[stackFrameObj.index].origin = source
+      dialogVisible.value = false
+    })
+}
 </script>
 
 <template>
@@ -108,7 +120,9 @@ const sourceMapUpload = async (file: any) => {
             <div>将文件拖到此处，或者<em>点击上传</em></div>
           </el-upload>
         </el-tab-pane>
-        <el-tab-pane label="远程加载" name="request"> 2 </el-tab-pane>
+        <el-tab-pane label="远程加载" name="request">
+          <el-button type="primary" @click="getSourceMapFile"> 获取源码文件 </el-button>
+        </el-tab-pane>
       </el-tabs>
     </el-dialog>
   </div>
