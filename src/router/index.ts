@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import { onStartRecording, onStopRecording } from '../common/record'
+import monitor from '../utils/monitor.esm.js'
 
 const router = createRouter({
   history: createWebHistory('/sourceMap-demo'),
@@ -39,6 +40,19 @@ router.beforeEach(async (_to, _from, next) => {
       onStopRecording()
     }
     next()
+  }
+})
+
+router.afterEach((to, from) => {
+  if (from.fullPath !== to.fullPath) {
+    const reportData = {
+      type: 'behavior',
+      subType: 'router-change',
+      startTime: performance.now(),
+      from: from.fullPath,
+      to: to.fullPath,
+    }
+    setTimeout(() => monitor.report(reportData), 1100)
   }
 })
 

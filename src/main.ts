@@ -9,6 +9,7 @@ import ElementPlus from 'element-plus'
 import App from './App.vue'
 import router from './router'
 import { onStopRecording } from './common/record'
+import monitor from './utils/monitor.esm.js'
 
 interface MessageInstance {
   $message?: {
@@ -45,5 +46,9 @@ app.config.errorHandler = (err: unknown, vm: ComponentPublicInstance | null) => 
   }
   localStorage.setItem('jsErrorList', JSON.stringify(jsError))
 }
+
+app.use(monitor, {
+  url: 'http://localhost:9800/reportData',
+})
 
 app.mount('#app')
