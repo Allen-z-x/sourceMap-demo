@@ -29,4 +29,9 @@ const onPlay = () => {
     <div id="doPlay"></div>
   </div>
 </template>
-<style lang="less" scoped></style>
+<style scoped>
+#doPlay {
+  display: flex;
+  justify-content: center;
+}
+</style>

@@ -104,9 +104,6 @@ const getSourceMapFile = () => {
           <template v-if="item.origin">
             <PreView :origin="item.origin"></PreView>
           </template>
-          <template v-else>
-            <el-col>{{ item.fileName }}</el-col>
-          </template>
         </el-row>
       </el-collapse-item>
     </el-collapse>
