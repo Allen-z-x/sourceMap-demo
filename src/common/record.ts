@@ -3,7 +3,7 @@ import type { eventWithTime } from '@rrweb/types'
 import { pack } from '@rrweb/packer'
 import { useEventStore } from '@/stores/eventStore'
 
-const eventsMatrix: [eventWithTime[]] = [[]]
+const eventsMatrix: eventWithTime[][] = [[]]
 let stopFn: undefined | (() => void)
 
 // const uploadQueue: any = []
@@ -21,6 +21,7 @@ let stopFn: undefined | (() => void)
 // }
 
 export const onStartRecording = (config = {}) => {
+  eventsMatrix.length = 0
   stopFn = rrweb.record({
     emit: (event, isCheckout) => {
       if (isCheckout) {
