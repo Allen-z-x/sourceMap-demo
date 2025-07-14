@@ -20,7 +20,6 @@ onMounted(() => {
     if (jsErrorList) {
       isError.value = true
       js_error.value = JSON.parse(jsErrorList)
-      console.log(js_error.value)
     }
   } catch (e) {
     console.log(e)
@@ -73,7 +72,6 @@ const getSourceMapFile = () => {
     .then((res) => res.text())
     .then(async (data) => {
       const source = await getSource(data, stackFrameObj.line, stackFrameObj.column)
-      console.log(source)
       js_error.value.stack_frames[stackFrameObj.index].origin = source
       dialogVisible.value = false
     })
@@ -113,10 +111,10 @@ const getSourceMapFile = () => {
       </el-collapse-item>
     </el-collapse>
     <el-dialog v-model="dialogVisible" title="sourceMap源码映射" :width="500">
-      <el-tabs v-model="activeTab" className="sourceMap-tabs">
+      <el-tabs v-model="activeTab" class="sourceMap-tabs">
         <el-tab-pane label="本地上传" name="local">
           <el-upload drag :before-upload="sourceMapUpload">
-            <i className="el-icon-upload"></i>
+            <i class="el-icon-upload"></i>
             <div>将文件拖到此处，或者<em>点击上传</em></div>
           </el-upload>
         </el-tab-pane>
@@ -127,3 +125,10 @@ const getSourceMapFile = () => {
     </el-dialog>
   </div>
 </template>
+<style scoped>
+.sourceMap-tabs {
+  :deep(.el-tabs__item) {
+    padding: 4px 0;
+  }
+}
+</style>
