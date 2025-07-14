@@ -3,7 +3,7 @@ import type { eventWithTime } from '@rrweb/types'
 import { pack } from '@rrweb/packer'
 import { useEventStore } from '@/stores/eventStore'
 
-const eventsMatrix: eventWithTime[][] = [[]]
+const eventsMatrix: eventWithTime[][] = []
 let stopFn: undefined | (() => void)
 
 // const uploadQueue: any = []
@@ -30,6 +30,9 @@ export const onStartRecording = (config = {}) => {
         if (eventsMatrix.length > 2) {
           eventsMatrix.splice(0, eventsMatrix.length - 2)
         }
+      }
+      if (eventsMatrix.length == 0) {
+        eventsMatrix.push([])
       }
       const lastEvents = eventsMatrix[eventsMatrix.length - 1]
       lastEvents.push(event)
